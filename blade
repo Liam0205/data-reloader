@@ -30,16 +30,15 @@ COLOR_NONE="\033[0m"
 
 if [ "${1}x" = "testx" ]; then
   shift
-  PROJ_NAME="test"
   BUILD_DIR="blade-bin"
   if [ ${#} -gt 0 ]; then
     TESTS=${@}
   else
-    TESTS="unit_test benchmark"
+    TESTS="test benchmark"
   fi
   for TEST in ${TESTS}; do
-    FOCUS_DIR="./${BUILD_DIR}/${PROJ_NAME}/${TEST}"
-    for exefile in $(find ${FOCUS_DIR} -name *_test -type f -o -name *_benchmark -type f 2>/dev/null); do
+    FOCUS_DIR="./${BUILD_DIR}/${TEST}"
+    for exefile in $(find ${FOCUS_DIR} -maxdepth 1 -type f 2>/dev/null); do
       printf "RUNNING: ${COLOR_CYAN}${exefile}${COLOR_NONE}.\n"
       ${exefile}
     done
