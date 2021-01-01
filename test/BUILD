@@ -1,13 +1,13 @@
 gen_rule (
   name = 'all',
   deps = [
-    ':hello_world',
+    ':reloadable',
   ]
 )
 
 cc_binary(
-  name = 'hello_world',
+  name = 'reloadable',
   srcs = [
-    'hello_world.cc',
+    'reloadable.cc',
   ],
 )

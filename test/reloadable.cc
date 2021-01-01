@@ -15,11 +15,32 @@
 // limitations under the License.
 // =========================================================================
 
+#include "data-reloader/reloadable.h"
+
 #include <catch.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
-#include <string>
+#include <iostream>
 
-TEST_CASE("hello world") {
-  static constexpr const char* hello = "hello world";
-  REQUIRE(hello == std::string(hello));
+struct Test final : public yuuki::Reloadable {
+  bool load(const std::string& path) final {
+    struct stat info;
+    if (stat(path.c_str(), &info) == 0) {
+      // print some info log here.
+      return true;
+    } else {
+      // print some error log here.
+      std::cerr << "Loading failed with path: " << path << '\n';
+      return false;
+    }
+  }
+};
+
+TEST_CASE("Construct") { REQUIRE_NOTHROW(Test()); }
+
+TEST_CASE("load") {
+  Test tester;
+  REQUIRE_FALSE(tester.load("nonexists"));
+  REQUIRE(tester.load("./blade"));
 }
