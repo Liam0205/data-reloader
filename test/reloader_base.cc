@@ -15,7 +15,7 @@
 // limitations under the License.
 // =========================================================================
 
-#include "data-reloader/base.h"
+#include "data-reloader/reloader_base.h"
 
 #include <catch.h>
 #include <sys/stat.h>
@@ -41,11 +41,17 @@ struct Test final : public yuuki::Reloadable {
 
 template <typename Payload>
 class ReloaderTest final : public yuuki::Reloader<Payload> {
-  void terminate() override { return; }
-  void launch() override { return; }
+  void terminate() override {
+    return;
+  }
+  void launch() override {
+    return;
+  }
 };
 
-TEST_CASE("Construct") { REQUIRE_NOTHROW(ReloaderTest<Test>()); }
+TEST_CASE("Construct") {
+  REQUIRE_NOTHROW(ReloaderTest<Test>());
+}
 
 TEST_CASE("Observers") {
   ReloaderTest<Test> tester;

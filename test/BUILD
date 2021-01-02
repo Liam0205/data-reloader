@@ -2,7 +2,7 @@ gen_rule (
   name = 'all',
   deps = [
     ':reloadable',
-    ':base',
+    ':reloader_base',
   ]
 )
 
@@ -14,8 +14,8 @@ cc_binary(
 )
 
 cc_binary(
-  name = 'base',
+  name = 'reloader_base',
   srcs = [
-    'base.cc',
+    'reloader_base.cc',
   ],
 )
