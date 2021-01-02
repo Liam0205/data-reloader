@@ -50,7 +50,7 @@ class TimerReloader : public Reloader<Payload> {
 
  private:
   void launch() override {
-    thread_ = std::move(std::thread(&TimerReloader::loop, this));
+    thread_ = std::thread(&TimerReloader::loop, this);
   }
 
  public:  // modifiers
