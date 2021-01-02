@@ -1,12 +1,3 @@
-gen_rule (
-  name = 'all',
-  deps = [
-    ':reloadable',
-    ':reloader_base',
-    ':timer_reloader',
-  ]
-)
-
 cc_binary(
   name = 'reloadable',
   srcs = [

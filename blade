@@ -38,7 +38,7 @@ if [ "${1}x" = "testx" ]; then
   fi
   for TEST in ${TESTS}; do
     FOCUS_DIR="./${BUILD_DIR}/${TEST}"
-    for exefile in $(find ${FOCUS_DIR} -maxdepth 1 -type f 2>/dev/null); do
+    for exefile in $(find ${FOCUS_DIR} -maxdepth 1 -type f ! -name "*.ninja" 2>/dev/null); do
       printf "RUNNING: ${COLOR_CYAN}${exefile}${COLOR_NONE}.\n"
       ${exefile}
     done
