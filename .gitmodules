@@ -9,3 +9,6 @@
   path = thirdparty/Catch2
   url = https://github.com/catchorg/Catch2.git
   branch = v2.x
+[submodule "thirdparty/countdown"]
+	path = thirdparty/countdown
+	url = https://github.com/Liam0205/countdown.git
