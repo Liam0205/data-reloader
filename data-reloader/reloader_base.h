@@ -31,7 +31,7 @@ template <typename Payload>
 class Reloader {
  public:
   using payload_t = Payload;
-  using ptr_t     = std::shared_ptr<payload_t>;
+  using ptr_t = std::shared_ptr<payload_t>;
 #if __cplusplus >= 201703L
   using shared_mutex = std::shared_mutex;
 #else
@@ -42,14 +42,14 @@ class Reloader {
                 "Payload Type should be Derived From the `Reloadable` Struct!");
 
  private:
-  std::atomic_bool     inited_{false};
-  std::once_flag       init_flag_;
+  std::atomic_bool inited_{false};
+  std::once_flag init_flag_;
   mutable shared_mutex mtx_;
-  ptr_t                payload_;
-  std::string          path_;
+  ptr_t payload_;
+  std::string path_;
 
  public:
-  Reloader()          = default;
+  Reloader() = default;
   virtual ~Reloader() = default;
 
  private:
@@ -74,7 +74,9 @@ class Reloader {
   virtual void terminate() = 0;
 
  public:  // observers
-  bool inited() const { return inited_.load(); }
+  bool inited() const {
+    return inited_.load();
+  }
 
   ptr_t get() const {
     if (inited()) {
@@ -85,7 +87,9 @@ class Reloader {
     }
   }
 
-  const std::string& path() const { return path_; }
+  const std::string& path() const {
+    return path_;
+  }
 
  protected:  // modifiers
   bool reload() {
@@ -99,7 +103,9 @@ class Reloader {
     }
   }
 
-  void path(const std::string& p) { path_ = p; }
+  void path(const std::string& p) {
+    path_ = p;
+  }
 
  private:
   virtual void launch() = 0;

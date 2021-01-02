@@ -21,7 +21,7 @@
 
 namespace yuuki {
 struct Reloadable {
-  Reloadable()          = default;
+  Reloadable() = default;
   virtual ~Reloadable() = default;
 
   Reloadable(const Reloadable&) = delete;

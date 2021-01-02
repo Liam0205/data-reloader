@@ -37,7 +37,9 @@ struct Test final : public yuuki::Reloadable {
   }
 };
 
-TEST_CASE("Construct") { REQUIRE_NOTHROW(Test()); }
+TEST_CASE("Construct") {
+  REQUIRE_NOTHROW(Test());
+}
 
 TEST_CASE("load") {
   Test tester;
