@@ -1,4 +1,4 @@
-# data-loader
+# data-reloader
 
 This project is targeting to build a C++ library for thread-safe data hot reloading.
 
