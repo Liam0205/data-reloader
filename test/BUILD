@@ -10,6 +10,9 @@ cc_binary(
   srcs = [
     'reloader_base.cc',
   ],
+  deps = [
+    '#pthread',
+  ],
 )
 
 cc_binary(

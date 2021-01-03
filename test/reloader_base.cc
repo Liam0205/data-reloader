@@ -41,9 +41,12 @@ struct Test final : public yuuki::Reloadable {
 
 template <typename Payload>
 class ReloaderTest final : public yuuki::Reloader<Payload> {
+ public:
   void terminate() override {
     return;
   }
+
+ private:
   void launch() override {
     return;
   }
@@ -64,10 +67,10 @@ TEST_CASE("Modifiers") {
   ReloaderTest<Test> tester;
 
   SECTION("init failed") {
-    REQUIRE_FALSE(tester.init(""));
+    REQUIRE_FALSE(tester.init("nonexists"));
     REQUIRE_FALSE(tester.inited());
     REQUIRE_FALSE(tester.get());
-    REQUIRE(tester.path() == "");
+    REQUIRE(tester.path() == "nonexists");
   }
 
   SECTION("init succ") {
