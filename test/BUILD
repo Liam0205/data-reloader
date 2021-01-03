@@ -17,4 +17,7 @@ cc_binary(
   srcs = [
     'timer_reloader.cc',
   ],
+  deps = [
+    '#pthread',
+  ],
 )
