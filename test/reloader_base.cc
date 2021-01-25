@@ -67,8 +67,7 @@ TEST_CASE("Modifiers") {
   ReloaderTest<Test> tester;
 
   SECTION("init failed") {
-    REQUIRE_FALSE(tester.init("nonexists"));
-    REQUIRE_FALSE(tester.inited());
+    REQUIRE(tester.init("nonexists"));
     REQUIRE_FALSE(tester.get());
     REQUIRE(tester.path() == "nonexists");
   }

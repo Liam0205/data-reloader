@@ -57,8 +57,8 @@ TEST_CASE("Modifiers") {
   yuuki::TimerReloader<Test> tester;
 
   SECTION("init failed") {
-    REQUIRE_FALSE(tester.init("nonexists", 1));
-    REQUIRE_FALSE(tester.inited());
+    REQUIRE(tester.init("nonexists", 1));
+    REQUIRE(tester.inited());
     REQUIRE_FALSE(tester.get());
     REQUIRE(tester.path() == "nonexists");
   }

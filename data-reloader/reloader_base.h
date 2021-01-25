@@ -23,6 +23,7 @@
 #include <shared_mutex>
 #include <string>
 #include <type_traits>
+#include <utility>
 
 #include "data-reloader/reloadable.h"
 
@@ -61,12 +62,9 @@ class Reloader {
     std::call_once(init_flag_, [&]() -> void {
       this->path(path);
 
-      if (reload()) {
-        launch();
-        inited_.store(true);
-      } else {
-        return;
-      }
+      reload();
+      launch();
+      inited_.store(true);
     });
     return inited();
   }
@@ -79,12 +77,8 @@ class Reloader {
   }
 
   ptr_t get() const {
-    if (inited()) {
-      std::shared_lock<shared_mutex> lk(mtx_);
-      return payload_;
-    } else {
-      return nullptr;
-    }
+    std::shared_lock<shared_mutex> lk(mtx_);
+    return payload_;
   }
 
   const std::string& path() const {
