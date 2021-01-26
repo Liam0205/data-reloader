@@ -37,9 +37,6 @@ class TimerReloader : public Reloader<Payload> {
   TimerReloader() = default;
   ~TimerReloader() {
     terminate();
-    if (thread_.joinable()) {
-      thread_.join();
-    }
   }
 
  public:  // modifiers
@@ -56,6 +53,9 @@ class TimerReloader : public Reloader<Payload> {
  public:  // modifiers
   void terminate() override {
     cd_.terminate();
+    if (thread_.joinable()) {
+      thread_.join();
+    }
   }
 
  private:
