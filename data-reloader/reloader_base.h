@@ -89,8 +89,10 @@ class Reloader {
   bool reload() {
     ptr_t tmp = std::make_shared<payload_t>();
     if (tmp->load(path_)) {
-      std::unique_lock<shared_mutex> lk(mtx_);
-      payload_ = std::move(tmp);
+      {
+        std::unique_lock<shared_mutex> lk(mtx_);
+        payload_.swap(tmp);
+      }
       return true;
     } else {
       return false;
