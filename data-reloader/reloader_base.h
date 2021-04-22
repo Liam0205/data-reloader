@@ -28,7 +28,7 @@
 #include "data-reloader/reloadable.h"
 
 namespace yuuki {
-template <typename Payload>
+template <typename Payload, std::enable_if_t<std::is_base_of<Reloadable, Payload>::value, bool> = true>
 class Reloader {
  public:
   using payload_t = Payload;
@@ -38,9 +38,6 @@ class Reloader {
 #else
   using shared_mutex = std::shared_timed_mutex;
 #endif
-
-  static_assert(std::is_base_of<Reloadable, payload_t>::value,
-                "Payload Type should be Derived From the `Reloadable` Struct!");
 
  private:
   std::atomic_bool inited_{false};
