@@ -61,7 +61,7 @@ class Reloader {
 
       reload();
       launch();
-      inited_.store(true);
+      inited_.store(true, std::memory_order_release);
     });
     return inited();
   }
@@ -70,7 +70,7 @@ class Reloader {
 
  public:  // observers
   bool inited() const {
-    return inited_.load();
+    return inited_.load(std::memory_order_acquire);
   }
 
   ptr_t get() const {
